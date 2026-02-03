@@ -184,16 +184,6 @@ export default function SignupPage() {
         </div>
 
         <div className="relative z-10">
-          <Link href="/">
-            <Image
-              src="/logo_one.jpeg"
-              alt="LJ Esports"
-              width={180}
-              height={60}
-              className="w-auto h-16 object-contain mb-12"
-            />
-          </Link>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
