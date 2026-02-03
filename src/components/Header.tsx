@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ShoppingCart, Heart } from 'lucide-react';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,10 +32,8 @@ export default function Header() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-black shadow-2xl' 
-            : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 bg-black transition-all duration-500 ${
+          isScrolled ? 'shadow-2xl' : ''
         }`}
       >
         <div className="max-w-350 mx-auto px-6 lg:px-12">
@@ -52,7 +51,7 @@ export default function Header() {
                   alt="LJ Esports" 
                   width={180} 
                   height={80}
-                  className="w-55 h-19 object-contain"
+                  className="w-auto h-12 lg:h-16 object-contain"
                   priority
                 />
               </motion.div>
@@ -80,54 +79,111 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* CTA Button - Desktop */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="hidden lg:block"
-            >
-              <Link href="#contact">
-                <motion.button
-                  whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(255,255,255,0.5)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-white text-black font-heading font-bold text-base uppercase tracking-widest border-2 border-white hover:bg-black hover:text-white transition-all duration-300"
-                >
-                  Join Us
-                </motion.button>
-              </Link>
-            </motion.div>
+            {/* Desktop Right Section */}
+            <div className="hidden lg:flex items-center gap-6">
+              {/* Cart Icon */}
+              <motion.button
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative text-white hover:text-gray-300 transition-colors"
+                aria-label="Shopping Cart"
+              >
+                <ShoppingCart size={24} strokeWidth={2} />
+                <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                  0
+                </span>
+              </motion.button>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden relative w-12 h-12 flex flex-col items-center justify-center gap-1.5 z-50"
-              aria-label="Toggle menu"
-            >
-              <motion.span
-                animate={{
-                  rotate: isMobileMenuOpen ? 45 : 0,
-                  y: isMobileMenuOpen ? 10 : 0,
-                }}
-                className="w-8 h-1 bg-white origin-center transition-all"
-              />
-              <motion.span
-                animate={{
-                  opacity: isMobileMenuOpen ? 0 : 1,
-                  scale: isMobileMenuOpen ? 0 : 1,
-                }}
-                className="w-8 h-1 bg-white transition-all"
-              />
-              <motion.span
-                animate={{
-                  rotate: isMobileMenuOpen ? -45 : 0,
-                  y: isMobileMenuOpen ? -10 : 0,
-                }}
-                className="w-8 h-1 bg-white origin-center transition-all"
-              />
-            </motion.button>
+              {/* Wishlist Icon */}
+              <motion.button
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative text-white hover:text-gray-300 transition-colors"
+                aria-label="Wishlist"
+              >
+                <Heart size={24} strokeWidth={2} />
+                <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                  0
+                </span>
+              </motion.button>
+
+              {/* Sign In Button */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Link href="/signup">
+                  <motion.button
+                    whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(255,255,255,0.5)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-white text-black font-heading font-bold text-base uppercase tracking-widest border-2 border-white hover:bg-black hover:text-white transition-all duration-300"
+                  >
+                    Sign In
+                  </motion.button>
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Mobile Right Section */}
+            <div className="lg:hidden flex items-center gap-4 z-50">
+              {/* Cart Icon Mobile */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative text-white"
+                aria-label="Shopping Cart"
+              >
+                <ShoppingCart size={22} strokeWidth={2} />
+                <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  0
+                </span>
+              </motion.button>
+
+              {/* Wishlist Icon Mobile */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative text-white"
+                aria-label="Wishlist"
+              >
+                <Heart size={22} strokeWidth={2} />
+                <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  0
+                </span>
+              </motion.button>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="relative w-12 h-12 flex flex-col items-center justify-center gap-1.5"
+                aria-label="Toggle menu"
+              >
+                <motion.span
+                  animate={{
+                    rotate: isMobileMenuOpen ? 45 : 0,
+                    y: isMobileMenuOpen ? 10 : 0,
+                  }}
+                  className="w-8 h-1 bg-white origin-center transition-all"
+                />
+                <motion.span
+                  animate={{
+                    opacity: isMobileMenuOpen ? 0 : 1,
+                    scale: isMobileMenuOpen ? 0 : 1,
+                  }}
+                  className="w-8 h-1 bg-white transition-all"
+                />
+                <motion.span
+                  animate={{
+                    rotate: isMobileMenuOpen ? -45 : 0,
+                    y: isMobileMenuOpen ? -10 : 0,
+                  }}
+                  className="w-8 h-1 bg-white origin-center transition-all"
+                />
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -170,9 +226,9 @@ export default function Header() {
             transition={{ duration: 0.4, delay: 0.4 }}
             className="mt-8"
           >
-            <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/signup" onClick={() => setIsMobileMenuOpen(false)}>
               <button className="px-12 py-5 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest border-2 border-white">
-                Join Us
+                Sign In
               </button>
             </Link>
           </motion.div>
