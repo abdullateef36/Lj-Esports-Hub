@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, Eye, EyeOff, Phone, ArrowRight, Gamepad2 } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, Phone, ArrowRight, UserCog2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -213,14 +213,14 @@ export default function SignupPage() {
           className="relative z-10"
         >
           <div className="flex items-center gap-4 mb-4">
-            <Gamepad2 className="w-12 h-12" />
+            <UserCog2 className="w-12 h-12" />
             <div>
               <p className="text-2xl font-heading font-bold">500+</p>
-              <p className="text-white/70">Managed Talents</p>
+              <p className="text-white/70">Clients & Creators Managed</p>
             </div>
           </div>
           <p className="text-white/60 text-sm">
-            Trusted by professional gamers worldwide
+            Partnering with talent, brands, and esports ventures globally.
           </p>
         </motion.div>
       </motion.div>
