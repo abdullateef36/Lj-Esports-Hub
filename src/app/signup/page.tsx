@@ -7,7 +7,6 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, Eye, EyeOff, Phone, ArrowRight, UserCog2 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function SignupPage() {
@@ -233,19 +232,7 @@ export default function SignupPage() {
           animate="visible"
           className="w-full max-w-md"
         >
-          {/* Mobile Logo */}
-          <motion.div variants={itemVariants} className="lg:hidden mb-8 text-center">
-            <Link href="/">
-              <Image
-                src="/logo_one.jpeg"
-                alt="LJ Esports"
-                width={150}
-                height={50}
-                className="w-auto h-12 object-contain mx-auto mb-4"
-              />
-            </Link>
-          </motion.div>
-
+    
           {/* Header */}
           <motion.div variants={itemVariants} className="mb-8">
             <h2 className="font-heading text-4xl font-bold text-black mb-2">
