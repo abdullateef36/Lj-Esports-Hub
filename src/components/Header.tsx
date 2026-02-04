@@ -232,7 +232,7 @@ export default function Header() {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="lg:hidden fixed inset-0 bg-black z-40"
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8 px-6">
+        <nav className="flex flex-col items-center justify-start h-full pt-32 gap-6 px-6">
           {navItems.map((item, index) => (
             <motion.div
               key={item.name}
@@ -246,7 +246,7 @@ export default function Header() {
               <Link
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="font-heading text-4xl font-bold text-white uppercase tracking-wider hover:text-gray-300 transition-colors"
+                className="font-heading text-3xl md:text-4xl font-bold text-white uppercase tracking-wider hover:text-gray-300 transition-colors"
               >
                 {item.name}
               </Link>
