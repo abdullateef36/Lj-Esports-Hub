@@ -4,11 +4,16 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart, Heart, LogOut } from 'lucide-react';
+import { auth } from '@/lib/firebase';
+import { signOut, User } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +22,24 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!auth) return;
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      if (!auth) return;
+      await signOut(auth);
+      router.push('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const navItems = [
     { name: 'Services', href: '#services' },
@@ -107,21 +130,33 @@ export default function Header() {
                 </span>
               </motion.button>
 
-              {/* Sign In Button */}
+              {/* Sign In / Logout Button */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Link href="/signup">
+                {user ? (
                   <motion.button
+                    onClick={handleLogout}
                     whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(255,255,255,0.5)" }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-10 py-4 bg-white text-black font-heading font-bold text-base uppercase tracking-widest border-2 border-white hover:bg-black hover:text-white transition-all duration-300"
+                    className="px-10 py-4 bg-white text-black font-heading font-bold text-base uppercase tracking-widest border-2 border-white hover:bg-black hover:text-white transition-all duration-300 flex items-center gap-2"
                   >
-                    Sign In
+                    <LogOut size={18} />
+                    Logout
                   </motion.button>
-                </Link>
+                ) : (
+                  <Link href="/login">
+                    <motion.button
+                      whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(255,255,255,0.5)" }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-10 py-4 bg-white text-black font-heading font-bold text-base uppercase tracking-widest border-2 border-white hover:bg-black hover:text-white transition-all duration-300"
+                    >
+                      Sign In
+                    </motion.button>
+                  </Link>
+                )}
               </motion.div>
             </div>
 
@@ -226,11 +261,24 @@ export default function Header() {
             transition={{ duration: 0.4, delay: 0.4 }}
             className="mt-8"
           >
-            <Link href="/signup" onClick={() => setIsMobileMenuOpen(false)}>
-              <button className="px-12 py-5 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest border-2 border-white">
-                Sign In
+            {user ? (
+              <button 
+                onClick={() => {
+                  handleLogout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="px-12 py-5 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest border-2 border-white flex items-center gap-3"
+              >
+                <LogOut size={24} />
+                Logout
               </button>
-            </Link>
+            ) : (
+              <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                <button className="px-12 py-5 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest border-2 border-white">
+                  Sign In
+                </button>
+              </Link>
+            )}
           </motion.div>
         </nav>
       </motion.div>

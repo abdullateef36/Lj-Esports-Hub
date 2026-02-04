@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
@@ -21,7 +21,14 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+  
+     useEffect(() => {
+      setIsClient(true);
+    }, []);
+  
+    if (!isClient) return null; // skip rendering on server
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -191,10 +198,10 @@ export default function SignupPage() {
           >
             <h1 className="font-heading text-6xl font-bold mb-6 leading-tight">
               JOIN THE<br />
-              <span className="text-white/70">ELITE</span>
+              <span className="text-white/70">NEXT WAVE</span>
             </h1>
             <p className="text-xl text-white/80 max-w-md font-medium">
-              Become part of the next generation of esports champions. Your journey to greatness starts here.
+              Connect with creators, teams, and esports ventures shaping the future of the industry.
             </p>
           </motion.div>
         </div>

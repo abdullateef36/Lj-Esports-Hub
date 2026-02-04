@@ -5,8 +5,7 @@ import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Trophy, Users, Target } from 'lucide-react';
-import Image from 'next/image';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Briefcase, Globe, Layers } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -22,8 +21,7 @@ export default function LoginPage() {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null; // skip rendering on server
-
+  if (!isClient) return null;
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,61 +79,19 @@ export default function LoginPage() {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const statsVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6 },
-    },
-  };
-
   return (
     <div className="min-h-screen bg-black flex">
       
       {/* Left Side - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 bg-white">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-md"
-        >
-          {/* Logo */}
-          <motion.div variants={itemVariants} className="mb-12 text-center lg:text-left">
-            <Link href="/">
-              <Image
-                src="/logo_one.jpeg"
-                alt="LJ Esports"
-                width={180}
-                height={60}
-                className="w-auto h-14 object-contain mx-auto lg:mx-0"
-              />
-            </Link>
-          </motion.div>
-
+        <div className="w-full max-w-md">
           {/* Header */}
-          <motion.div variants={itemVariants} className="mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
             <h1 className="font-heading text-5xl font-bold text-black mb-3 uppercase">
               Welcome<br />Back
             </h1>
@@ -157,7 +113,11 @@ export default function LoginPage() {
             )}
 
             {/* Email */}
-            <motion.div variants={itemVariants}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               <label className="block text-sm font-heading font-bold text-black mb-3 uppercase tracking-widest">
                 Email Address
               </label>
@@ -176,7 +136,11 @@ export default function LoginPage() {
             </motion.div>
 
             {/* Password */}
-            <motion.div variants={itemVariants}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <div className="flex justify-between items-center mb-3">
                 <label className="block text-sm font-heading font-bold text-black uppercase tracking-widest">
                   Password
@@ -212,7 +176,9 @@ export default function LoginPage() {
 
             {/* Submit Button */}
             <motion.button
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
@@ -233,7 +199,12 @@ export default function LoginPage() {
             </motion.button>
 
             {/* Sign Up Link */}
-            <motion.div variants={itemVariants} className="text-center pt-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center pt-6"
+            >
               <p className="text-gray-600 font-medium text-base">
                 Don&apos;t have an account?{' '}
                 <Link href="/signup" className="text-black font-heading font-bold hover:underline text-lg">
@@ -242,7 +213,7 @@ export default function LoginPage() {
               </p>
             </motion.div>
           </form>
-        </motion.div>
+        </div>
       </div>
 
       {/* Right Side - Branding */}
@@ -297,47 +268,57 @@ export default function LoginPage() {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             <h2 className="font-heading text-7xl font-bold mb-8 leading-none uppercase">
-              Your<br />
-              Victory<br />
-              <span className="text-white/60">Starts Here</span>
+              Powering the<br />
+              Business of<br />
+              <span className="text-white/60">Esports</span>
             </h2>
             <p className="text-2xl text-white/80 max-w-lg font-medium leading-relaxed">
-              Access your dashboard, track your progress, and connect with the esports elite.
+              From talent management to large-scale esports initiatives, we handle the strategy so you focus on growth.
             </p>
           </motion.div>
         </div>
 
         {/* Stats Section */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="relative z-10 grid grid-cols-3 gap-6"
-        >
-          <motion.div variants={statsVariants} className="text-center">
+        <div className="relative z-10 grid grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-center"
+          >
             <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Trophy className="w-8 h-8" />
+              <Briefcase className="w-8 h-8" />
             </div>
             <p className="text-3xl font-heading font-bold mb-1">500+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Champions</p>
+            <p className="text-white/70 text-sm uppercase tracking-wider">Clients & Creators</p>
           </motion.div>
           
-          <motion.div variants={statsVariants} className="text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="text-center"
+          >
             <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Users className="w-8 h-8" />
+              <Globe className="w-8 h-8" />
             </div>
             <p className="text-3xl font-heading font-bold mb-1">50K+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Community</p>
+            <p className="text-white/70 text-sm uppercase tracking-wider">Audience Reach</p>
           </motion.div>
           
-          <motion.div variants={statsVariants} className="text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            className="text-center"
+          >
             <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Target className="w-8 h-8" />
+              <Layers className="w-8 h-8" />
             </div>
             <p className="text-3xl font-heading font-bold mb-1">100+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Tournaments</p>
+            <p className="text-white/70 text-sm uppercase tracking-wider">Executed Projectss</p>
           </motion.div>
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );
