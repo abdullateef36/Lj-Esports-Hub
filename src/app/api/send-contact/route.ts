@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     // Email to company
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: `${process.env.EMAIL_TO},${process.env.ADMIN_USER}`,
+      to: process.env.ADMIN_EMAIL,
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
