@@ -206,7 +206,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="flex flex-wrap gap-4"
               >
-                <Link href="#contact">
+                <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -510,7 +510,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="flex flex-wrap justify-center gap-4"
               >
-                <Link href="#contact">
+                <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

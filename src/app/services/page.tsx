@@ -386,7 +386,7 @@ export default function ServicesPage() {
                 </motion.button>
               </Link>
 
-              <Link href="#contact">
+              <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -556,7 +556,7 @@ export default function ServicesPage() {
             </div>
 
             <div className="text-center">
-              <Link href="#contact">
+              <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -607,7 +607,7 @@ export default function ServicesPage() {
                 <p className="text-white/80 mb-6">
                   {service.description}
                 </p>
-                <Link href="#contact" className="inline-flex items-center gap-2 text-white font-heading font-bold hover:gap-4 transition-all">
+                <Link href="/contact" className="inline-flex items-center gap-2 text-white font-heading font-bold hover:gap-4 transition-all">
                   Learn More
                   <ChevronRight className="w-5 h-5" />
                 </Link>
@@ -680,7 +680,7 @@ export default function ServicesPage() {
                   ))}
                 </ul>
 
-                <Link href="#contact">
+                <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -705,7 +705,7 @@ export default function ServicesPage() {
             className="text-center mt-12 text-gray-600"
           >
             All pricing is customized based on your specific needs and goals.
-            <Link href="#contact" className="text-black font-bold ml-2 hover:underline">
+            <Link href="/contact" className="text-black font-bold ml-2 hover:underline">
               Contact us for a personalized quote
             </Link>
           </motion.p>
@@ -807,7 +807,7 @@ export default function ServicesPage() {
               <p className="text-2xl text-white/80 mb-10 max-w-2xl mx-auto">
                 Let&apos;s build your esports empire together
               </p>
-              <Link href="#contact">
+              <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
