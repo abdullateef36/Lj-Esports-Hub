@@ -10,7 +10,6 @@ import {
   TrendingUp,
   Award,
   CheckCircle,
-  Star,
   Briefcase,
   MessageSquare,
   BarChart3,
@@ -25,12 +24,14 @@ import {
   Settings,
   Heart,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  Zap,
+  Brain,
+  Code
 } from 'lucide-react';
 
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState(0);
-//   const [activeTab, setActiveTab] = useState('all');
   const containerRef = useRef(null);
   
   const { scrollYProgress } = useScroll({
@@ -77,22 +78,17 @@ export default function ServicesPage() {
           detail: 'Smart money management and investment guidance'
         }
       ],
-      stats: [
-        { value: '200+', label: 'Active Talents' },
-        { value: '95%', label: 'Renewal Rate' },
-        { value: '$5M+', label: 'Deals Negotiated' }
+      benefits: [
+        { icon: Zap, text: 'Fast-track your career growth' },
+        { icon: Shield, text: 'Full legal & financial protection' },
+        { icon: Brain, text: 'Strategic long-term planning' }
       ],
       process: [
         'Initial consultation and career assessment',
         'Custom strategy development',
         'Contract negotiation and deal closure',
         'Ongoing support and career growth'
-      ],
-      testimonial: {
-        quote: 'LJ Esports helped me triple my income and secure partnerships I never thought possible.',
-        author: 'Alex Martinez',
-        role: 'Pro Gamer'
-      }
+      ]
     },
     {
       id: 'partnerships',
@@ -118,27 +114,22 @@ export default function ServicesPage() {
           detail: 'Access to international brand networks'
         },
         {
-          icon: Star,
+          icon: Sparkles,
           title: 'Brand Matching',
           detail: 'Perfect alignment between talent and sponsors'
         }
       ],
-      stats: [
-        { value: '150+', label: 'Brand Partners' },
-        { value: '80%', label: 'Long-term Deals' },
-        { value: '$3M+', label: 'Partnership Value' }
+      benefits: [
+        { icon: Globe, text: 'Access to global brand network' },
+        { icon: DollarSign, text: 'Maximize sponsorship revenue' },
+        { icon: Code, text: 'Data-driven brand matching' }
       ],
       process: [
         'Brand compatibility assessment',
         'Proposal development and pitching',
         'Contract negotiation and terms',
         'Campaign execution and reporting'
-      ],
-      testimonial: {
-        quote: 'The partnerships secured have transformed my channel into a sustainable business.',
-        author: 'Sarah Kim',
-        role: 'Content Creator'
-      }
+      ]
     },
     {
       id: 'content',
@@ -169,22 +160,17 @@ export default function ServicesPage() {
           detail: 'Build and nurture your loyal fanbase'
         }
       ],
-      stats: [
-        { value: '300%', label: 'Avg Growth' },
-        { value: '50K+', label: 'Hours Streamed' },
-        { value: '10M+', label: 'Total Reach' }
+      benefits: [
+        { icon: TrendingUp, text: 'Accelerated audience growth' },
+        { icon: BarChart3, text: 'Data-backed decisions' },
+        { icon: Sparkles, text: 'Professional content quality' }
       ],
       process: [
         'Audience analysis and goal setting',
         'Content calendar creation',
         'Performance tracking and optimization',
         'Monthly strategy reviews'
-      ],
-      testimonial: {
-        quote: 'My channel grew 400% in 6 months with their strategic guidance.',
-        author: 'Jordan Taylor',
-        role: 'Streamer'
-      }
+      ]
     },
     {
       id: 'tournament',
@@ -215,22 +201,17 @@ export default function ServicesPage() {
           detail: 'Sports psychology and peak performance support'
         }
       ],
-      stats: [
-        { value: '100+', label: 'Tournaments' },
-        { value: '45', label: 'Championship Wins' },
-        { value: '$2M+', label: 'Prize Money' }
+      benefits: [
+        { icon: Trophy, text: 'Focus on performance, not logistics' },
+        { icon: Brain, text: 'Mental coaching & preparation' },
+        { icon: BarChart3, text: 'Post-tournament analysis' }
       ],
       process: [
         'Tournament identification and registration',
         'Comprehensive preparation and training',
         'On-site support and coordination',
         'Post-tournament analysis and debriefing'
-      ],
-      testimonial: {
-        quote: 'Having professional support at tournaments gave me the confidence to perform at my best.',
-        author: 'Marcus Chen',
-        role: 'Competitive Player'
-      }
+      ]
     }
   ];
 
@@ -501,37 +482,23 @@ export default function ServicesPage() {
                   {mainServices[selectedService].description}
                 </p>
 
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                  {mainServices[selectedService].stats.map((stat, idx) => (
+                {/* Benefits */}
+                <div className="space-y-4 mb-8">
+                  <h4 className="font-heading text-xl font-bold uppercase mb-4">
+                    Key Benefits
+                  </h4>
+                  {mainServices[selectedService].benefits.map((benefit, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      className="text-center"
+                      className="flex items-center gap-4 bg-white/10 p-4"
                     >
-                      <div className="font-heading text-3xl font-bold mb-1">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm text-white/70 uppercase tracking-wider">
-                        {stat.label}
-                      </div>
+                      <benefit.icon className="w-6 h-6 shrink-0" />
+                      <span className="font-semibold">{benefit.text}</span>
                     </motion.div>
                   ))}
-                </div>
-
-                {/* Testimonial */}
-                <div className="bg-white/10 p-6 border-l-4 border-white">
-                  <p className="text-lg italic mb-4">
-                    &ldquo;{mainServices[selectedService].testimonial.quote}&rdquo;
-                  </p>
-                  <div className="font-heading font-bold">
-                    {mainServices[selectedService].testimonial.author}
-                  </div>
-                  <div className="text-sm text-white/70">
-                    {mainServices[selectedService].testimonial.role}
-                  </div>
                 </div>
               </div>
 
@@ -606,7 +573,7 @@ export default function ServicesPage() {
 
       {/* Additional Services */}
       <section className="py-24 bg-black text-white">
-        <div className="max-w-350uto px-6 lg:px-12">
+        <div className="max-w-350 mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

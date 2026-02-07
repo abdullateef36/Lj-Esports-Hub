@@ -7,13 +7,14 @@ import Image from 'next/image';
 import { ShoppingCart, Heart, LogOut } from 'lucide-react';
 import { auth } from '@/lib/firebase';
 import { signOut, User } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,12 +44,22 @@ export default function Header() {
 
   const navItems = [
     { name: 'Services', href: '/services' },
-    { name: 'Project', href: '#projects' },
-    { name: 'Shop', href: '#shop' },
-    { name: 'News', href: '#news' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Project', href: '/projects' },
+    { name: 'Shop', href: '/shop' },
+    { name: 'News', href: '/news' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
+
+  // Helper function to check if current page is active
+  const isActive = (href: string) => {
+    // For hash links, check if we're on home page
+    if (href.startsWith('#')) {
+      return pathname === '/';
+    }
+    // For regular routes, exact match
+    return pathname === href;
+  };
 
   return (
     <>
@@ -91,11 +102,19 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="relative font-heading text-lg font-semibold text-white uppercase tracking-wider group"
+                    className={`relative font-heading text-lg font-semibold uppercase tracking-wider group transition-colors ${
+                      isActive(item.href) 
+                        ? 'text-white' 
+                        : 'text-white/70 hover:text-white'
+                    }`}
                   >
                     {item.name}
                     <motion.span
-                      className="absolute -bottom-2 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"
+                      className={`absolute -bottom-2 left-0 h-0.5 bg-white transition-all duration-300 ${
+                        isActive(item.href) 
+                          ? 'w-full' 
+                          : 'w-0 group-hover:w-full'
+                      }`}
                     />
                   </Link>
                 </motion.div>
@@ -242,14 +261,27 @@ export default function Header() {
                 x: isMobileMenuOpen ? 0 : 50,
               }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="relative"
             >
               <Link
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="font-heading text-3xl md:text-4xl font-bold text-white uppercase tracking-wider hover:text-gray-300 transition-colors"
+                className={`font-heading text-3xl md:text-4xl font-bold uppercase tracking-wider transition-colors ${
+                  isActive(item.href)
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-white'
+                }`}
               >
                 {item.name}
               </Link>
+              {isActive(item.href) && (
+                <motion.div
+                  layoutId="mobile-active-indicator"
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-white"
+                  initial={false}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
             </motion.div>
           ))}
           <motion.div

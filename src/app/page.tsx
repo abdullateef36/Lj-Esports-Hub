@@ -6,16 +6,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { 
   ArrowRight, 
-  Trophy, 
-  Users, 
-  Target, 
-  Star,
-  Gamepad2,
+  Users,
+  Target,
   TrendingUp,
   Award,
   Zap,
   ShoppingBag,
-  Briefcase
+  Briefcase,
+  Rocket,
+  Shield,
+  Globe,
+  Sparkles,
+  Brain,
+  Code,
+  Mic,
+  Video
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -53,34 +58,53 @@ export default function HomePage() {
     }
   ];
 
-  const stats = [
-    { number: '500+', label: 'Managed Talents', icon: Users },
-    { number: '50K+', label: 'Community Members', icon: Star },
-    { number: '100+', label: 'Tournaments Won', icon: Trophy },
-    { number: '$2M+', label: 'Deals Secured', icon: TrendingUp }
+  const expertise = [
+    {
+      icon: Rocket,
+      title: 'Growth Focused',
+      description: 'Strategies built to scale your career fast'
+    },
+    {
+      icon: Shield,
+      title: 'Full Protection',
+      description: 'Legal and financial safeguards at every step'
+    },
+    {
+      icon: Globe,
+      title: 'Global Network',
+      description: 'Access to international opportunities'
+    },
+    {
+      icon: Sparkles,
+      title: 'Personal Branding',
+      description: 'Craft an authentic, memorable identity'
+    }
   ];
 
-  const testimonials = [
+  const approach = [
     {
-      name: 'Alex Chen',
-      role: 'Professional Gamer',
-      game: 'Valorant',
-      quote: 'LJ Esports transformed my career. Within 6 months, I went from streaming to my first major tournament win.',
-      image: '/placeholder-avatar.jpg'
+      number: '01',
+      title: 'Discovery Call',
+      description: 'We get to know your goals, strengths, and vision for your esports career.',
+      icon: Mic
     },
     {
-      name: 'Maria Santos',
-      role: 'Content Creator',
-      game: 'League of Legends',
-      quote: 'The team helped me secure partnerships I never thought possible. My channel grew 300% in one year.',
-      image: '/placeholder-avatar.jpg'
+      number: '02',
+      title: 'Strategy Design',
+      description: 'Custom roadmap tailored to your unique situation and ambitions.',
+      icon: Brain
     },
     {
-      name: 'Jordan Lee',
-      role: 'Pro Player',
-      game: 'CS:GO',
-      quote: 'Professional management that actually understands esports. They handle everything so I can focus on winning.',
-      image: '/placeholder-avatar.jpg'
+      number: '03',
+      title: 'Execution',
+      description: 'We handle negotiations, partnerships, and logistics while you focus on performing.',
+      icon: Code
+    },
+    {
+      number: '04',
+      title: 'Growth & Scale',
+      description: 'Continuous optimization and expansion as your career evolves.',
+      icon: Video
     }
   ];
 
@@ -235,26 +259,26 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Right Content - Stats Grid */}
+            {/* Right Content - Expertise Grid */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="grid grid-cols-2 gap-6"
             >
-              {stats.map((stat, index) => (
+              {expertise.map((item, index) => (
                 <motion.div
-                  key={stat.label}
+                  key={item.title}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                   className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 group hover:bg-white/20 transition-all"
                 >
-                  <stat.icon className="w-10 h-10 mb-4 group-hover:scale-110 transition-transform" />
-                  <div className="font-heading text-4xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-white/70 font-medium uppercase tracking-wider text-sm">
-                    {stat.label}
+                  <item.icon className="w-10 h-10 mb-4 group-hover:scale-110 transition-transform" />
+                  <div className="font-heading text-xl font-bold mb-2 uppercase">{item.title}</div>
+                  <div className="text-white/70 font-medium text-sm">
+                    {item.description}
                   </div>
                 </motion.div>
               ))}
@@ -341,7 +365,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Our Approach Section */}
       <section className="py-24 bg-black text-white">
         <div className="max-w-350 mx-auto px-6 lg:px-12">
           <motion.div
@@ -352,39 +376,40 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-5xl lg:text-7xl font-bold mb-6 uppercase">
-              Success Stories
+              Our Approach
             </h2>
             <p className="text-xl text-white/80 max-w-2xl mx-auto">
-              Hear from the champions we&apos;ve helped build
+              A proven process designed to maximize your potential
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+          <div className="grid lg:grid-cols-2 gap-8">
+            {approach.map((step, index) => (
               <motion.div
-                key={testimonial.name}
+                key={step.number}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
                 whileHover={{ y: -10 }}
-                className="bg-white/10 border-2 border-white/20 p-8 backdrop-blur-sm"
+                className="bg-white/10 border-2 border-white/20 p-8 backdrop-blur-sm hover:bg-white/20 transition-all"
               >
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-white" />
-                  ))}
-                </div>
-                <p className="text-lg mb-6 text-white/90 italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                    <Gamepad2 className="w-6 h-6" />
+                <div className="flex items-start gap-6">
+                  <div className="shrink-0">
+                    <div className="w-16 h-16 bg-white text-black flex items-center justify-center font-heading font-bold text-2xl mb-4">
+                      {step.number}
+                    </div>
+                    <div className="w-16 h-16 bg-white/10 flex items-center justify-center">
+                      <step.icon className="w-8 h-8" />
+                    </div>
                   </div>
                   <div>
-                    <div className="font-heading font-bold text-lg">{testimonial.name}</div>
-                    <div className="text-white/70 text-sm">{testimonial.role} • {testimonial.game}</div>
+                    <h3 className="font-heading text-2xl font-bold mb-4 uppercase">
+                      {step.title}
+                    </h3>
+                    <p className="text-white/80 text-lg">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               </motion.div>
