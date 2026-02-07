@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Briefcase, Globe, Layers } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Zap, Target, Rocket } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -15,13 +15,6 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
-
-   useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,6 +71,24 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  const values = [
+    {
+      icon: Zap,
+      title: 'Fast Growth',
+      description: 'Accelerate your esports career with proven strategies'
+    },
+    {
+      icon: Target,
+      title: 'Focused Support',
+      description: 'Personalized management tailored to your goals'
+    },
+    {
+      icon: Rocket,
+      title: 'Future Ready',
+      description: 'Built for the next generation of esports talent'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-black flex">
@@ -241,10 +252,10 @@ export default function LoginPage() {
               key={i}
               className="absolute border-2 border-white"
               style={{
-                width: `${40 + Math.random() * 60}px`,
-                height: `${40 + Math.random() * 60}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
+                width: `${60 + i * 20}px`,
+                height: `${60 + i * 20}px`,
+                top: `${10 + i * 6}%`,
+                left: `${5 + i * 6}%`,
               }}
               animate={{
                 y: [0, -30, 0],
@@ -252,10 +263,10 @@ export default function LoginPage() {
                 scale: [1, 1.1, 1],
               }}
               transition={{
-                duration: 8 + Math.random() * 4,
+                duration: 10 + i * 1.5,
                 repeat: Infinity,
                 ease: 'linear',
-                delay: Math.random() * 2,
+                delay: i * 0.4,
               }}
             />
           ))}
@@ -268,56 +279,39 @@ export default function LoginPage() {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             <h2 className="font-heading text-7xl font-bold mb-8 leading-none uppercase">
-              Powering the<br />
-              Business of<br />
-              <span className="text-white/60">Esports</span>
+              Your<br />
+              Esports<br />
+              <span className="text-white/60">Partner</span>
             </h2>
             <p className="text-2xl text-white/80 max-w-lg font-medium leading-relaxed">
-              From talent management to large-scale esports initiatives, we handle the strategy so you focus on growth.
+              Fresh perspective. Bold strategies. Built for talents who are ready to dominate.
             </p>
           </motion.div>
         </div>
 
-        {/* Stats Section */}
-        <div className="relative z-10 grid grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center"
-          >
-            <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Briefcase className="w-8 h-8" />
-            </div>
-            <p className="text-3xl font-heading font-bold mb-1">500+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Clients & Creators</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-center"
-          >
-            <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Globe className="w-8 h-8" />
-            </div>
-            <p className="text-3xl font-heading font-bold mb-1">50K+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Audience Reach</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-            className="text-center"
-          >
-            <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-4 mx-auto">
-              <Layers className="w-8 h-8" />
-            </div>
-            <p className="text-3xl font-heading font-bold mb-1">100+</p>
-            <p className="text-white/70 text-sm uppercase tracking-wider">Executed Projectss</p>
-          </motion.div>
+        {/* Values Section */}
+        <div className="relative z-10 space-y-6">
+          {values.map((value, index) => (
+            <motion.div
+              key={value.title}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 + index * 0.15 }}
+              className="flex items-start gap-4 group"
+            >
+              <div className="w-12 h-12 bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-all">
+                <value.icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-heading font-bold text-lg uppercase mb-1">
+                  {value.title}
+                </h3>
+                <p className="text-white/70 text-sm">
+                  {value.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </div>

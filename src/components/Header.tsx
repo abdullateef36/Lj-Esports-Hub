@@ -42,7 +42,7 @@ export default function Header() {
   };
 
   const navItems = [
-    { name: 'Services', href: '#services' },
+    { name: 'Services', href: '/services' },
     { name: 'Project', href: '#projects' },
     { name: 'Shop', href: '#shop' },
     { name: 'News', href: '#news' },

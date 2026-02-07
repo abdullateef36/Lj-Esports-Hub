@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, Eye, EyeOff, Phone, ArrowRight, UserCog2 } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, Phone, ArrowRight, Zap, Target, Rocket } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SignupPage() {
@@ -20,15 +20,8 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   
-     useEffect(() => {
-      setIsClient(true);
-    }, []);
-  
-    if (!isClient) return null; // skip rendering on server
-
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -156,6 +149,24 @@ export default function SignupPage() {
     },
   };
 
+  const values = [
+    {
+      icon: Zap,
+      title: 'Fast Growth',
+      description: 'Accelerate your esports career'
+    },
+    {
+      icon: Target,
+      title: 'Focused Support',
+      description: 'Personalized management'
+    },
+    {
+      icon: Rocket,
+      title: 'Future Ready',
+      description: 'Built for next-gen talent'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white flex">
       
@@ -166,24 +177,42 @@ export default function SignupPage() {
         transition={{ duration: 0.8 }}
         className="hidden lg:flex lg:w-1/2 bg-black text-white p-12 flex-col justify-between relative overflow-hidden"
       >
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          {[...Array(20)].map((_, i) => (
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(white 1px, transparent 1px),
+                linear-gradient(90deg, white 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+            }}
+          />
+        </div>
+
+        {/* Floating Squares */}
+        <div className="absolute inset-0 overflow-hidden opacity-20">
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-32 h-32 border border-white"
+              className="absolute border-2 border-white"
               style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
+                width: `${60 + i * 20}px`,
+                height: `${60 + i * 20}px`,
+                top: `${10 + i * 6}%`,
+                left: `${5 + i * 6}%`,
               }}
               animate={{
-                rotate: [0, 360],
-                scale: [1, 1.2, 1],
+                y: [0, -30, 0],
+                rotate: [0, 180, 360],
+                scale: [1, 1.1, 1],
               }}
               transition={{
-                duration: 10 + Math.random() * 10,
+                duration: 10 + i * 1.5,
                 repeat: Infinity,
                 ease: 'linear',
+                delay: i * 0.4,
               }}
             />
           ))}
@@ -195,9 +224,9 @@ export default function SignupPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <h1 className="font-heading text-6xl font-bold mb-6 leading-tight">
-              JOIN THE<br />
-              <span className="text-white/70">NEXT WAVE</span>
+            <h1 className="font-heading text-6xl font-bold mb-6 leading-tight uppercase">
+              Join The<br />
+              <span className="text-white/70">Elite</span>
             </h1>
             <p className="text-xl text-white/80 max-w-md font-medium">
               Connect with creators, teams, and esports ventures shaping the future of the industry.
@@ -205,22 +234,34 @@ export default function SignupPage() {
           </motion.div>
         </div>
 
+        {/* Values Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="relative z-10"
+          className="relative z-10 space-y-6"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <UserCog2 className="w-12 h-12" />
-            <div>
-              <p className="text-2xl font-heading font-bold">500+</p>
-              <p className="text-white/70">Clients & Creators Managed</p>
-            </div>
-          </div>
-          <p className="text-white/60 text-sm">
-            Partnering with talent, brands, and esports ventures globally.
-          </p>
+          {values.map((value, index) => (
+            <motion.div
+              key={value.title}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1 + index * 0.15 }}
+              className="flex items-start gap-4 group"
+            >
+              <div className="w-12 h-12 bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-all">
+                <value.icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-heading font-bold text-lg uppercase mb-1">
+                  {value.title}
+                </h3>
+                <p className="text-white/70 text-sm">
+                  {value.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
 
