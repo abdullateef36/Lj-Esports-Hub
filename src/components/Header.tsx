@@ -53,10 +53,6 @@ export default function Header() {
 
   // Helper function to check if current page is active
   const isActive = (href: string) => {
-    // For hash links, check if we're on home page
-    if (href.startsWith('#')) {
-      return pathname === '/';
-    }
     // For regular routes, exact match
     return pathname === href;
   };

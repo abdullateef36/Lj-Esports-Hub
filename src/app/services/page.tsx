@@ -354,18 +354,18 @@ export default function ServicesPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block px-6 py-3 bg-white/10 border border-white/20 text-sm font-heading font-bold uppercase tracking-widest mb-8"
+              className="inline-block px-4 lg:px-6 py-2 lg:py-3 bg-white/10 border border-white/20 text-xs lg:text-sm font-heading font-bold uppercase tracking-widest mb-6 lg:mb-8"
             >
               Elite Services
             </motion.span>
 
-            <h1 className="font-heading text-6xl lg:text-9xl font-bold mb-8 leading-none uppercase">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-bold mb-6 lg:mb-8 leading-none uppercase">
               Transform<br />
               Your<br />
               <span className="text-white/60">Career</span>
             </h1>
 
-            <p className="text-2xl lg:text-3xl text-white/80 mb-12 max-w-3xl mx-auto font-medium">
+            <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white/80 mb-8 lg:mb-12 max-w-3xl mx-auto font-medium px-4">
               Comprehensive esports management services designed to elevate your game and maximize your potential
             </p>
 
@@ -373,16 +373,16 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap justify-center gap-4"
+              className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 px-4"
             >
               <Link href="#services">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-6 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center gap-3 group"
+                  className="w-full sm:w-auto px-8 lg:px-12 py-4 lg:py-6 bg-white text-black font-heading font-bold text-base lg:text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-3 group"
                 >
                   Explore Services
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="w-5 lg:w-6 h-5 lg:h-6 group-hover:translate-x-2 transition-transform" />
                 </motion.button>
               </Link>
 
@@ -390,7 +390,7 @@ export default function ServicesPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-6 border-2 border-white text-white font-heading font-bold text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                  className="w-full sm:w-auto px-8 lg:px-12 py-4 lg:py-6 border-2 border-white text-white font-heading font-bold text-base lg:text-xl uppercase tracking-widest hover:bg-white hover:text-black transition-all"
                 >
                   Get Started
                 </motion.button>
@@ -404,7 +404,7 @@ export default function ServicesPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
@@ -417,39 +417,40 @@ export default function ServicesPage() {
       </section>
 
       {/* Main Services Section */}
-      <section id="services" className="py-24 bg-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
+      <section id="services" className="py-16 lg:py-24 bg-white">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            className="text-center mb-12 lg:mb-20"
           >
-            <h2 className="font-heading text-5xl lg:text-7xl font-bold text-black mb-6 uppercase">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-4 lg:mb-6 uppercase px-4">
               Core Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Everything you need to build a sustainable, successful career in esports
             </p>
           </motion.div>
 
           {/* Service Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          <div className="flex flex-wrap justify-center gap-3 lg:gap-4 mb-12 lg:mb-16 px-4">
             {mainServices.map((service, index) => (
               <motion.button
                 key={service.id}
                 onClick={() => setSelectedService(index)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-8 py-4 font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-3 ${
+                className={`px-4 sm:px-6 lg:px-8 py-3 lg:py-4 font-heading font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider transition-all flex items-center gap-2 lg:gap-3 ${
                   selectedService === index
                     ? 'bg-black text-white'
                     : 'bg-white text-black border-2 border-black hover:bg-gray-100'
                 }`}
               >
-                <service.icon className="w-5 h-5" />
-                {service.title}
+                <service.icon className="w-4 lg:w-5 h-4 lg:h-5" />
+                <span className="hidden sm:inline">{service.title}</span>
+                <span className="sm:hidden">{service.title.split(' ')[0]}</span>
               </motion.button>
             ))}
           </div>
@@ -460,31 +461,31 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-black text-white p-12 lg:p-16"
+            className="bg-black text-white p-6 sm:p-8 lg:p-12 xl:p-16"
           >
-            <div className="grid lg:grid-cols-2 gap-12 mb-12">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-8 lg:mb-12">
               <div>
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
                   {(() => {
                     const ServiceIcon = mainServices[selectedService].icon;
-                    return <ServiceIcon className="w-16 h-16" strokeWidth={1.5} />;
+                    return <ServiceIcon className="w-12 lg:w-16 h-12 lg:h-16 shrink-0" strokeWidth={1.5} />;
                   })()}
                   <div>
-                    <h3 className="font-heading text-4xl lg:text-5xl font-bold uppercase">
+                    <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold uppercase wrap-break-word">
                       {mainServices[selectedService].title}
                     </h3>
-                    <p className="text-xl text-white/70 mt-2">
+                    <p className="text-lg sm:text-xl text-white/70 mt-2">
                       {mainServices[selectedService].tagline}
                     </p>
                   </div>
                 </div>
-                <p className="text-xl text-white/80 mb-8 leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 lg:mb-8 leading-relaxed">
                   {mainServices[selectedService].description}
                 </p>
 
                 {/* Benefits */}
-                <div className="space-y-4 mb-8">
-                  <h4 className="font-heading text-xl font-bold uppercase mb-4">
+                <div className="space-y-4 mb-6 lg:mb-8">
+                  <h4 className="font-heading text-lg lg:text-xl font-bold uppercase mb-4">
                     Key Benefits
                   </h4>
                   {mainServices[selectedService].benefits.map((benefit, idx) => (
@@ -493,10 +494,10 @@ export default function ServicesPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      className="flex items-center gap-4 bg-white/10 p-4"
+                      className="flex items-center gap-3 lg:gap-4 bg-white/10 p-3 lg:p-4"
                     >
-                      <benefit.icon className="w-6 h-6 shrink-0" />
-                      <span className="font-semibold">{benefit.text}</span>
+                      <benefit.icon className="w-5 lg:w-6 h-5 lg:h-6 shrink-0" />
+                      <span className="font-semibold text-sm sm:text-base">{benefit.text}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -504,10 +505,10 @@ export default function ServicesPage() {
 
               <div>
                 {/* Features */}
-                <h4 className="font-heading text-2xl font-bold mb-6 uppercase">
+                <h4 className="font-heading text-xl lg:text-2xl font-bold mb-4 lg:mb-6 uppercase">
                   What&apos;s Included
                 </h4>
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-6 lg:mb-8">
                   {mainServices[selectedService].features.map((feature, idx) => (
                     <motion.div
                       key={idx}
@@ -515,15 +516,15 @@ export default function ServicesPage() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
                       whileHover={{ x: 5 }}
-                      className="bg-white/10 p-6 cursor-pointer transition-all hover:bg-white/20"
+                      className="bg-white/10 p-4 sm:p-6 cursor-pointer transition-all hover:bg-white/20"
                     >
-                      <div className="flex items-start gap-4">
-                        <feature.icon className="w-8 h-8 shrink-0" />
+                      <div className="flex items-start gap-3 lg:gap-4">
+                        <feature.icon className="w-6 lg:w-8 h-6 lg:h-8 shrink-0" />
                         <div>
-                          <h5 className="font-heading font-bold text-xl mb-2">
+                          <h5 className="font-heading font-bold text-lg lg:text-xl mb-2">
                             {feature.title}
                           </h5>
-                          <p className="text-white/70">
+                          <p className="text-white/70 text-sm sm:text-base">
                             {feature.detail}
                           </p>
                         </div>
@@ -533,7 +534,7 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Process */}
-                <h4 className="font-heading text-2xl font-bold mb-6 uppercase">
+                <h4 className="font-heading text-xl lg:text-2xl font-bold mb-4 lg:mb-6 uppercase">
                   Our Process
                 </h4>
                 <div className="space-y-3">
@@ -543,12 +544,12 @@ export default function ServicesPage() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.4 + idx * 0.1 }}
-                      className="flex items-center gap-4"
+                      className="flex items-start gap-3 lg:gap-4"
                     >
-                      <div className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-heading font-bold shrink-0">
+                      <div className="w-7 lg:w-8 h-7 lg:h-8 bg-white text-black rounded-full flex items-center justify-center font-heading font-bold shrink-0 text-sm lg:text-base">
                         {idx + 1}
                       </div>
-                      <p className="text-white/90">{step}</p>
+                      <p className="text-white/90 text-sm sm:text-base pt-1">{step}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -560,10 +561,10 @@ export default function ServicesPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-6 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center gap-3 group"
+                  className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-6 bg-white text-black font-heading font-bold text-base sm:text-lg lg:text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-3 group"
                 >
                   Get This Service
-                  <ChevronRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  <ChevronRight className="w-5 lg:w-6 h-5 lg:h-6 group-hover:translate-x-2 transition-transform" />
                 </motion.button>
               </Link>
             </div>
@@ -572,24 +573,24 @@ export default function ServicesPage() {
       </section>
 
       {/* Additional Services */}
-      <section className="py-24 bg-black text-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
+      <section className="py-16 lg:py-24 bg-black text-white">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
-            <h2 className="font-heading text-5xl lg:text-7xl font-bold mb-6 uppercase">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6 uppercase px-4">
               Additional Services
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto px-4">
               Specialized support to cover every aspect of your esports career
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {additionalServices.map((service, index) => (
               <motion.div
                 key={index}
@@ -598,18 +599,18 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="bg-white/10 border-2 border-white/20 p-8 backdrop-blur-sm hover:bg-white/20 transition-all cursor-pointer"
+                className="bg-white/10 border-2 border-white/20 p-6 lg:p-8 backdrop-blur-sm hover:bg-white/20 transition-all cursor-pointer"
               >
-                <service.icon className="w-12 h-12 mb-6" strokeWidth={1.5} />
-                <h3 className="font-heading text-2xl font-bold mb-4 uppercase">
+                <service.icon className="w-10 lg:w-12 h-10 lg:h-12 mb-4 lg:mb-6" strokeWidth={1.5} />
+                <h3 className="font-heading text-xl lg:text-2xl font-bold mb-3 lg:mb-4 uppercase">
                   {service.title}
                 </h3>
-                <p className="text-white/80 mb-6">
+                <p className="text-white/80 mb-4 lg:mb-6 text-sm sm:text-base">
                   {service.description}
                 </p>
-                <Link href="/contact" className="inline-flex items-center gap-2 text-white font-heading font-bold hover:gap-4 transition-all">
+                <Link href="/contact" className="inline-flex items-center gap-2 text-white font-heading font-bold hover:gap-4 transition-all text-sm sm:text-base">
                   Learn More
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 lg:w-5 h-4 lg:h-5" />
                 </Link>
               </motion.div>
             ))}
@@ -618,24 +619,24 @@ export default function ServicesPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
-            <h2 className="font-heading text-5xl lg:text-7xl font-bold text-black mb-6 uppercase">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-4 lg:mb-6 uppercase px-4">
               Investment Tiers
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Flexible pricing tailored to your career stage and goals
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {pricingTiers.map((tier, index) => (
               <motion.div
                 key={index}
@@ -644,37 +645,37 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: tier.highlighted ? 1 : 1.02 }}
-                className={`border-4 p-8 relative ${
+                className={`border-4 p-6 lg:p-8 relative ${
                   tier.highlighted
-                    ? 'border-black bg-black text-white scale-105'
+                    ? 'border-black bg-black text-white lg:scale-105'
                     : 'border-black bg-white text-black'
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-white text-black font-heading font-bold text-sm uppercase tracking-wider">
+                  <div className="absolute -top-3 lg:-top-4 left-1/2 -translate-x-1/2 px-4 lg:px-6 py-1 lg:py-2 bg-white text-black font-heading font-bold text-xs lg:text-sm uppercase tracking-wider whitespace-nowrap">
                     Most Popular
                   </div>
                 )}
 
-                <h3 className="font-heading text-3xl font-bold mb-2 uppercase">
+                <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-2 uppercase">
                   {tier.name}
                 </h3>
-                <p className={`mb-6 ${tier.highlighted ? 'text-white/70' : 'text-gray-600'}`}>
+                <p className={`mb-6 text-sm sm:text-base ${tier.highlighted ? 'text-white/70' : 'text-gray-600'}`}>
                   {tier.description}
                 </p>
-                <div className="mb-8">
-                  <div className="font-heading text-4xl font-bold mb-2">
+                <div className="mb-6 lg:mb-8">
+                  <div className="font-heading text-3xl lg:text-4xl font-bold mb-2">
                     {tier.price}
                   </div>
-                  <p className={`text-sm ${tier.highlighted ? 'text-white/70' : 'text-gray-600'}`}>
+                  <p className={`text-xs sm:text-sm ${tier.highlighted ? 'text-white/70' : 'text-gray-600'}`}>
                     Tailored to your needs
                   </p>
                 </div>
 
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 lg:space-y-4 mb-6 lg:mb-8">
                   {tier.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                    <li key={idx} className="flex items-start gap-2 lg:gap-3 text-sm sm:text-base">
+                      <CheckCircle className="w-4 lg:w-5 h-4 lg:h-5 shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -684,7 +685,7 @@ export default function ServicesPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-full py-4 font-heading font-bold text-lg uppercase tracking-widest transition-all ${
+                    className={`w-full py-3 lg:py-4 font-heading font-bold text-base lg:text-lg uppercase tracking-widest transition-all ${
                       tier.highlighted
                         ? 'bg-white text-black hover:bg-gray-200'
                         : 'bg-black text-white hover:bg-gray-800'
@@ -702,7 +703,7 @@ export default function ServicesPage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mt-12 text-gray-600"
+            className="text-center mt-8 lg:mt-12 text-gray-600 text-sm sm:text-base px-4"
           >
             All pricing is customized based on your specific needs and goals.
             <Link href="/contact" className="text-black font-bold ml-2 hover:underline">
@@ -713,24 +714,24 @@ export default function ServicesPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-black text-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
+      <section className="py-16 lg:py-24 bg-black text-white">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
-            <h2 className="font-heading text-5xl lg:text-7xl font-bold mb-6 uppercase">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6 uppercase px-4">
               FAQ
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto px-4">
               Common questions about our services
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {[
               {
                 q: 'How do I get started?',
@@ -763,12 +764,12 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/10 p-8 border-2 border-white/20"
+                className="bg-white/10 p-6 lg:p-8 border-2 border-white/20"
               >
-                <h3 className="font-heading text-xl font-bold mb-4 uppercase">
+                <h3 className="font-heading text-lg lg:text-xl font-bold mb-3 lg:mb-4 uppercase">
                   {faq.q}
                 </h3>
-                <p className="text-white/80">
+                <p className="text-white/80 text-sm sm:text-base">
                   {faq.a}
                 </p>
               </motion.div>
@@ -778,14 +779,14 @@ export default function ServicesPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-black text-white p-12 lg:p-20 relative overflow-hidden text-center"
+            className="bg-black text-white p-8 sm:p-12 lg:p-20 relative overflow-hidden text-center"
           >
             <div className="absolute inset-0 opacity-10">
               <div
@@ -801,20 +802,20 @@ export default function ServicesPage() {
             </div>
 
             <div className="relative z-10">
-              <h2 className="font-heading text-5xl lg:text-7xl font-bold mb-6 uppercase">
+              <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 lg:mb-6 uppercase">
                 Ready to Dominate?
               </h2>
-              <p className="text-2xl text-white/80 mb-10 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-8 lg:mb-10 max-w-2xl mx-auto">
                 Let&apos;s build your esports empire together
               </p>
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-6 bg-white text-black font-heading font-bold text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center gap-3 group"
+                  className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-6 bg-white text-black font-heading font-bold text-base sm:text-lg lg:text-xl uppercase tracking-widest hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-3 group"
                 >
                   Start Your Journey
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="w-5 lg:w-6 h-5 lg:h-6 group-hover:translate-x-2 transition-transform" />
                 </motion.button>
               </Link>
             </div>
