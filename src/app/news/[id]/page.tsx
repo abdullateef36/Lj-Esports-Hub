@@ -130,14 +130,19 @@ export default function NewsPostPage() {
           {/* Rich Content */}
           <div 
             className="prose prose-lg max-w-none
-              prose-headings:font-heading prose-headings:font-bold prose-headings:uppercase
+              prose-headings:font-heading prose-headings:font-bold prose-headings:uppercase prose-headings:text-black
               prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
               prose-p:text-gray-700 prose-p:leading-relaxed
-              prose-a:text-black prose-a:font-bold prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-black
-              prose-img:rounded-lg prose-img:my-8
-              prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:pl-6 prose-blockquote:italic
-              prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded
+              prose-a:text-blue-600 prose-a:font-semibold prose-a:underline hover:prose-a:text-blue-800
+              prose-strong:text-black prose-strong:font-bold
+              prose-em:text-gray-800 prose-em:italic
+              prose-img:rounded-lg prose-img:my-8 prose-img:shadow-lg
+              prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700 prose-blockquote:my-8
+              prose-code:bg-gray-100 prose-code:text-gray-900 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-mono prose-code:text-sm
+              prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
+              prose-ul:list-disc prose-ul:pl-6 prose-ul:my-6
+              prose-ol:list-decimal prose-ol:pl-6 prose-ol:my-6
+              prose-li:text-gray-700 prose-li:my-2
             "
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
@@ -156,9 +161,9 @@ export default function NewsPostPage() {
             {post.tags.map((tag, index) => (
               <span
                 key={index}
-                className="bg-black text-white px-4 py-2 font-heading font-bold text-sm uppercase tracking-wider hover:bg-gray-800 transition-colors"
+                className="bg-black text-white px-4 py-2 font-heading font-bold text-sm uppercase tracking-wider hover:bg-gray-800 transition-colors cursor-pointer"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </motion.div>

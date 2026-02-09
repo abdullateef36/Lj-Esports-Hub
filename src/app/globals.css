@@ -18,3 +18,12 @@ body {
   color: var(--foreground);
   font-family: inherit;
 }
+
+.prose blockquote {
+  border-left: 4px solid black;
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: #374151;
+  margin: 2rem 0;
+}
+
