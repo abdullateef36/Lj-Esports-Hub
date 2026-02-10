@@ -41,6 +41,30 @@ export default function CartPage() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [lga, setLga] = useState("");
+
+  const lagosLgas = [
+    "Agege",
+    "Ajeromi-Ifelodun",
+    "Alimosho",
+    "Amuwo-Odofin",
+    "Apapa",
+    "Badagry",
+    "Epe",
+    "Eti-Osa",
+    "Ibeju-Lekki",
+    "Ifako-Ijaiye",
+    "Ikeja",
+    "Ikorodu",
+    "Kosofe",
+    "Lagos Island",
+    "Lagos Mainland",
+    "Mushin",
+    "Ojo",
+    "Oshodi-Isolo",
+    "Shomolu",
+    "Surulere",
+  ];
 
   const formatCurrency = useMemo(
     () =>
@@ -65,6 +89,33 @@ export default function CartPage() {
     };
   }, []);
 
+  const handlePaystackSuccess = (response: PaystackResponse) => {
+    void (async () => {
+      try {
+        await fetch("/api/send-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName,
+            email,
+            phone,
+            lga,
+            address,
+            items: cart,
+            total: cartTotal,
+            reference: response.reference,
+          }),
+        });
+      } catch (error) {
+        console.error("Failed to send order email:", error);
+      }
+
+      await clearCart();
+      alert("Payment successful! Your order is confirmed.");
+      console.log("Paystack success:", response);
+    })();
+  };
+
   const handleCheckout = () => {
     if (!user) {
       alert("Please log in to continue.");
@@ -78,7 +129,7 @@ export default function CartPage() {
       alert("Your cart is empty.");
       return;
     }
-    if (!fullName || !email || !phone || !address) {
+    if (!fullName || !email || !phone || !address || !lga) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -100,16 +151,14 @@ export default function CartPage() {
         custom_fields: [
           { display_name: "Full Name", variable_name: "full_name", value: fullName },
           { display_name: "Phone", variable_name: "phone", value: phone },
+          { display_name: "LGA", variable_name: "lga", value: lga },
           { display_name: "Address", variable_name: "address", value: address },
         ],
       },
       onClose: () => {
         alert("Payment window closed.");
       },
-      callback: async () => {
-        await clearCart();
-        alert("Payment successful! Your order is confirmed.");
-      },
+      callback: handlePaystackSuccess,
     });
 
     handler.openIframe();
@@ -204,9 +253,13 @@ export default function CartPage() {
           </div>
 
           <div className="border-4 border-black p-6 h-fit">
-            <h2 className="font-heading text-2xl font-bold uppercase mb-4">
-              Checkout
-            </h2>
+            <div className="flex items-center gap-3 mb-4">
+              <div>
+                <h2 className="font-heading text-2xl font-bold uppercase">
+                  Checkout
+                </h2>
+              </div>
+            </div>
             <div className="space-y-3">
               <input
                 type="text"
@@ -229,6 +282,18 @@ export default function CartPage() {
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full p-3 border-2 border-black"
               />
+              <select
+                value={lga}
+                onChange={(e) => setLga(e.target.value)}
+                className="w-full p-3 border-2 border-black bg-white"
+              >
+                <option value="">Select LGA (Lagos) *</option>
+                {lagosLgas.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
               <input
                 type="text"
                 placeholder="Address *"
