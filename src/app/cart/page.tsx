@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ShoppingCart, Minus, Plus, Trash2, CreditCard } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
+import { orderService } from "@/lib/services/orderService";
 
 interface PaystackResponse {
   reference: string;
@@ -92,6 +93,32 @@ export default function CartPage() {
   const handlePaystackSuccess = (response: PaystackResponse) => {
     void (async () => {
       try {
+        if (user) {
+          await orderService.createOrder({
+            userId: user.uid,
+            items: cart.map((item) => ({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              quantity: item.quantity,
+              image: item.image,
+            })),
+            deliveryInfo: {
+              fullName,
+              email,
+              phone,
+              address,
+              lga,
+              state: "Lagos",
+            },
+            subtotal: cartTotal,
+            tax: 0,
+            total: cartTotal,
+            status: "pending",
+            reference: response.reference,
+          });
+        }
+
         await fetch("/api/send-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -113,6 +113,13 @@ export default function ShopPage() {
                 </button>
               )}
 
+              <Link
+                href="/orders"
+                className="relative border-2 border-white text-white px-6 py-3 font-heading font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all flex items-center gap-2"
+              >
+                {isAdmin ? "Manage Orders" : "Orders"}
+              </Link>
+
               <button
                 onClick={() => setWishlistOpen(true)}
                 className="relative border-2 border-white text-white px-6 py-3 font-heading font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all flex items-center gap-2"
