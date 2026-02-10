@@ -109,7 +109,7 @@ export default function EditProduct({ product, onClose }: Props) {
 
           <input
             type="number"
-            placeholder="Price (USD) *"
+            placeholder="Price (NGN) *"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className="w-full p-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-black"

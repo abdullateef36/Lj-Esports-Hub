@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingBag,
@@ -47,6 +48,16 @@ export default function ShopPage() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<ShopProduct | null>(null);
+
+  const formatCurrency = useMemo(
+    () =>
+      new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        maximumFractionDigits: 0,
+      }),
+    []
+  );
 
   const deleteProduct = async (productId: string) => {
     if (!db) return;
@@ -183,7 +194,7 @@ export default function ShopPage() {
                     </p>
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-2xl font-bold">
-                        ${product.price.toFixed(2)}
+                        {formatCurrency.format(product.price)}
                       </span>
                       <button
                         onClick={() =>
@@ -295,7 +306,7 @@ export default function ShopPage() {
                             {item.name}
                           </h4>
                           <p className="text-sm text-gray-600 mb-2">
-                            ${item.price.toFixed(2)}
+                            {formatCurrency.format(item.price)}
                           </p>
                           <div className="flex items-center gap-2">
                             <button
@@ -331,12 +342,15 @@ export default function ShopPage() {
                         Total
                       </span>
                       <span className="text-2xl font-bold">
-                        ${cartTotal.toFixed(2)}
+                        {formatCurrency.format(cartTotal)}
                       </span>
                     </div>
-                    <button className="w-full bg-black text-white px-6 py-3 font-heading font-bold uppercase tracking-wider hover:bg-gray-900 transition-all">
+                    <Link
+                      href="/cart"
+                      className="w-full bg-black text-white px-6 py-3 font-heading font-bold uppercase tracking-wider hover:bg-gray-900 transition-all text-center"
+                    >
                       Checkout
-                    </button>
+                    </Link>
                   </div>
                 </>
               )}
@@ -403,7 +417,7 @@ export default function ShopPage() {
                           {item.name}
                         </h4>
                         <p className="text-sm text-gray-600 mb-2">
-                          ${item.price.toFixed(2)}
+                          {formatCurrency.format(item.price)}
                         </p>
                         <div className="flex items-center gap-2">
                           <button

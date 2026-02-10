@@ -124,7 +124,7 @@ export default function Header() {
             {/* Desktop Right Section */}
             <div className="hidden lg:flex items-center gap-6">
               {/* Cart Icon */}
-              <Link href="/shop" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Shopping Cart">
+              <Link href="/cart" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Shopping Cart">
                 <motion.span
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -138,7 +138,7 @@ export default function Header() {
               </Link>
 
               {/* Wishlist Icon */}
-              <Link href="/shop" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Wishlist">
+              <Link href="/wishlist" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Wishlist">
                 <motion.span
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -184,7 +184,7 @@ export default function Header() {
             {/* Mobile Right Section */}
             <div className="lg:hidden flex items-center gap-4 z-50">
               {/* Cart Icon Mobile */}
-              <Link href="/shop" className="relative text-white" aria-label="Shopping Cart">
+              <Link href="/cart" className="relative text-white" aria-label="Shopping Cart">
                 <motion.span
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -198,7 +198,7 @@ export default function Header() {
               </Link>
 
               {/* Wishlist Icon Mobile */}
-              <Link href="/shop" className="relative text-white" aria-label="Wishlist">
+              <Link href="/wishlist" className="relative text-white" aria-label="Wishlist">
                 <motion.span
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
