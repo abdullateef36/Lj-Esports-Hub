@@ -107,9 +107,9 @@ export default function NewsCard({ post, isAdmin, index }: Props) {
                       <Clock size={14} className="lg:w-4 lg:h-4" />
                       <span>{post.createdAt?.toDate?.()?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || "N/A"}</span>
                     </div>
-                    <div className="hidden sm:flex items-center gap-2 text-white font-heading font-bold group-hover:gap-4 transition-all">
+                    <div className="flex items-center gap-2 text-white font-heading font-bold text-[10px] sm:text-xs lg:text-sm group-hover:gap-4 transition-all">
                       READ ARTICLE
-                      <ArrowRight size={18} />
+                      <ArrowRight size={16} className="sm:w-4.5 sm:h-4.5" />
                     </div>
                   </motion.div>
                 </div>
