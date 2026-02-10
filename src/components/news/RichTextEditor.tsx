@@ -27,9 +27,8 @@ import {
   AlignCenter,
   AlignRight,
   Image as ImageIcon,
-  Link as LinkIcon,
 } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
 interface Props {
   value: string;
@@ -37,9 +36,6 @@ interface Props {
 }
 
 export default function RichTextEditor({ value, onChange }: Props) {
-  const [showLinkInput, setShowLinkInput] = useState(false);
-  const [linkUrl, setLinkUrl] = useState('');
-
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -53,6 +49,8 @@ export default function RichTextEditor({ value, onChange }: Props) {
       }),
       Link.configure({
         openOnClick: false,
+        autolink: true, // Auto-detect URLs as you type
+        linkOnPaste: true, // Auto-link URLs when pasted
         HTMLAttributes: {
           class: 'text-blue-400 underline hover:text-blue-300',
         },
@@ -93,40 +91,6 @@ export default function RichTextEditor({ value, onChange }: Props) {
     };
     input.click();
   }, [editor]);
-
-  const toggleLink = useCallback(() => {
-    if (!editor) return;
-
-    // If already a link, remove it
-    if (editor.isActive('link')) {
-      editor.chain().focus().unsetLink().run();
-      return;
-    }
-
-    // Show link input dialog
-    setShowLinkInput(true);
-    const previousUrl = editor.getAttributes('link').href || '';
-    setLinkUrl(previousUrl);
-  }, [editor]);
-
-  const applyLink = useCallback(() => {
-    if (!editor || !linkUrl.trim()) {
-      setShowLinkInput(false);
-      return;
-    }
-
-    // Add https:// if no protocol specified
-    const url = linkUrl.startsWith('http') ? linkUrl : `https://${linkUrl}`;
-    
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
-    setShowLinkInput(false);
-    setLinkUrl('');
-  }, [editor, linkUrl]);
-
-  const cancelLink = useCallback(() => {
-    setShowLinkInput(false);
-    setLinkUrl('');
-  }, []);
 
   if (!editor) {
     return (
@@ -316,17 +280,6 @@ export default function RichTextEditor({ value, onChange }: Props) {
           <ImageIcon size={18} className="text-white" />
         </button>
 
-        <button
-          onClick={toggleLink}
-          className={`p-2 rounded hover:bg-white/10 transition-colors ${
-            editor.isActive('link') ? 'bg-white/20' : ''
-          }`}
-          type="button"
-          title={editor.isActive('link') ? 'Remove Link' : 'Add Link'}
-        >
-          <LinkIcon size={18} className="text-white" />
-        </button>
-
         <div className="w-px h-8 bg-white/20 mx-1" />
 
         {/* Undo/Redo */}
@@ -350,43 +303,6 @@ export default function RichTextEditor({ value, onChange }: Props) {
           <Redo size={18} className="text-white" />
         </button>
       </div>
-
-      {/* Link Input Dialog */}
-      {showLinkInput && (
-        <div className="bg-[#1a1a1a] border-b-2 border-white/20 p-4">
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              value={linkUrl}
-              onChange={(e) => setLinkUrl(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  applyLink();
-                } else if (e.key === 'Escape') {
-                  cancelLink();
-                }
-              }}
-              placeholder="Enter URL (e.g., https://example.com)"
-              className="flex-1 px-3 py-2 bg-[#0d0d0d] border-2 border-white/20 text-white placeholder:text-gray-500 focus:outline-none focus:border-white rounded"
-              autoFocus
-            />
-            <button
-              onClick={applyLink}
-              className="px-4 py-2 bg-white text-black font-heading font-bold text-sm uppercase hover:bg-gray-200 transition-all"
-              type="button"
-            >
-              Apply
-            </button>
-            <button
-              onClick={cancelLink}
-              className="px-4 py-2 bg-white/10 text-white font-heading font-bold text-sm uppercase hover:bg-white/20 transition-all"
-              type="button"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Editor Content */}
       <EditorContent editor={editor} />

@@ -273,11 +273,13 @@ export default function HomePage() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 group hover:bg-white/20 transition-all"
+                  className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 lg:p-8 group hover:bg-white/20 transition-all"
                 >
                   <item.icon className="w-10 h-10 mb-4 group-hover:scale-110 transition-transform" />
-                  <div className="font-heading text-xl font-bold mb-2 uppercase">{item.title}</div>
-                  <div className="text-white/70 font-medium text-sm">
+                  <div className="font-heading text-lg sm:text-xl font-bold mb-2 uppercase wrap-break-word">
+                    {item.title}
+                  </div>
+                  <div className="text-white/70 font-medium text-sm leading-snug wrap-break-word">
                     {item.description}
                   </div>
                 </motion.div>
