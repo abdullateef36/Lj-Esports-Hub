@@ -114,7 +114,7 @@ export default function ShopPage() {
               )}
 
               <Link
-                href="/orders"
+                href={isAdmin ? "/admin/orders" : "/orders"}
                 className="relative border-2 border-white text-white px-6 py-3 font-heading font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all flex items-center gap-2"
               >
                 {isAdmin ? "Manage Orders" : "Orders"}

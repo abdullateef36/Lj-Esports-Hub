@@ -209,11 +209,11 @@ export default function CartPage() {
         </div>
       </section>
 
-      <section className="py-12 lg:py-16">
-        <div className="max-w-350 mx-auto px-6 lg:px-12 grid lg:grid-cols-[1.4fr_0.6fr] gap-10">
+      <section className="py-10 lg:py-16">
+        <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-12 grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
             {cart.length === 0 ? (
-              <div className="border-4 border-black p-8 text-center">
+              <div className="border-4 border-black p-6 sm:p-8 text-center">
                 <p className="text-lg">Your cart is empty.</p>
                 <Link
                   href="/shop"
@@ -227,15 +227,15 @@ export default function CartPage() {
                 {cart.map((item) => (
                   <div
                     key={item.id}
-                    className="border-4 border-black p-4 flex gap-4 items-center"
+                    className="border-4 border-black p-4 flex flex-col sm:flex-row gap-4 sm:items-center"
                   >
-                    <div className="relative w-24 h-24 shrink-0">
+                    <div className="relative w-full sm:w-24 h-56 sm:h-24 shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
                         className="object-cover"
-                        sizes="96px"
+                        sizes="(max-width: 640px) 100vw, 96px"
                       />
                     </div>
                     <div className="flex-1">
@@ -245,7 +245,7 @@ export default function CartPage() {
                       <p className="text-gray-600">
                         {formatCurrency.format(item.price)}
                       </p>
-                      <div className="flex items-center gap-2 mt-3">
+                      <div className="flex flex-wrap items-center gap-2 mt-3">
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
                           className="p-1 border-2 border-black hover:bg-black hover:text-white transition-all"
@@ -263,14 +263,14 @@ export default function CartPage() {
                         </button>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="ml-auto p-1 border-2 border-black hover:bg-black hover:text-white transition-all"
+                          className="sm:ml-auto p-1 border-2 border-black hover:bg-black hover:text-white transition-all"
                           aria-label="Remove item"
                         >
                           <Trash2 size={14} />
                         </button>
                       </div>
                     </div>
-                    <div className="text-right font-bold">
+                    <div className="text-left sm:text-right font-bold">
                       {formatCurrency.format(item.price * item.quantity)}
                     </div>
                   </div>
@@ -279,7 +279,7 @@ export default function CartPage() {
             )}
           </div>
 
-          <div className="border-4 border-black p-6 h-fit">
+          <div className="border-4 border-black p-4 sm:p-6 h-fit">
             <div className="flex items-center gap-3 mb-4">
               <div>
                 <h2 className="font-heading text-2xl font-bold uppercase">
