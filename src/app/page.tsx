@@ -246,7 +246,7 @@ export default function HomePage() {
                   </motion.button>
                 </Link>
 
-                <Link href="#shop">
+                <Link href="/shop">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

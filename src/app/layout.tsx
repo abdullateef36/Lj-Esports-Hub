@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Nunito, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/context/UserContext";
+import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -34,13 +36,17 @@ export default function RootLayout({
         className={`${nunito.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <UserProvider>
-        <Header />
+          <CartProvider>
+            <WishlistProvider>
+              <Header />
 
-        <main className="min-h-screen pt-20 lg:pt-24">
-          {children}
-          </main>
+              <main className="min-h-screen pt-20 lg:pt-24">
+                {children}
+              </main>
 
-        <Footer />
+              <Footer />
+            </WishlistProvider>
+          </CartProvider>
         </UserProvider>
       </body>
     </html>

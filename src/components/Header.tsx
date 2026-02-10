@@ -8,6 +8,8 @@ import { ShoppingCart, Heart, LogOut } from 'lucide-react';
 import { auth } from '@/lib/firebase';
 import { signOut, User } from 'firebase/auth';
 import { useRouter, usePathname } from 'next/navigation';
+import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,6 +17,8 @@ export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,30 +124,32 @@ export default function Header() {
             {/* Desktop Right Section */}
             <div className="hidden lg:flex items-center gap-6">
               {/* Cart Icon */}
-              <motion.button
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative text-white hover:text-gray-300 transition-colors"
-                aria-label="Shopping Cart"
-              >
-                <ShoppingCart size={24} strokeWidth={2} />
-                <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </motion.button>
+              <Link href="/shop" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Shopping Cart">
+                <motion.span
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative"
+                >
+                  <ShoppingCart size={24} strokeWidth={2} />
+                  <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                </motion.span>
+              </Link>
 
               {/* Wishlist Icon */}
-              <motion.button
+              <Link href="/shop" className="relative text-white hover:text-gray-300 transition-colors" aria-label="Wishlist">
+                <motion.span
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative text-white hover:text-gray-300 transition-colors"
-                aria-label="Wishlist"
-              >
-                <Heart size={24} strokeWidth={2} />
-                <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </motion.button>
+                  className="relative"
+                >
+                  <Heart size={24} strokeWidth={2} />
+                  <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                </motion.span>
+              </Link>
 
               {/* Sign In / Logout Button */}
               <motion.div
@@ -178,30 +184,32 @@ export default function Header() {
             {/* Mobile Right Section */}
             <div className="lg:hidden flex items-center gap-4 z-50">
               {/* Cart Icon Mobile */}
-              <motion.button
+              <Link href="/shop" className="relative text-white" aria-label="Shopping Cart">
+                <motion.span
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative text-white"
-                aria-label="Shopping Cart"
-              >
-                <ShoppingCart size={22} strokeWidth={2} />
-                <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </motion.button>
+                  className="relative"
+                >
+                  <ShoppingCart size={22} strokeWidth={2} />
+                  <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                </motion.span>
+              </Link>
 
               {/* Wishlist Icon Mobile */}
-              <motion.button
+              <Link href="/shop" className="relative text-white" aria-label="Wishlist">
+                <motion.span
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative text-white"
-                aria-label="Wishlist"
-              >
-                <Heart size={22} strokeWidth={2} />
-                <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </motion.button>
+                  className="relative"
+                >
+                  <Heart size={22} strokeWidth={2} />
+                  <span className="absolute -top-1 -right-1 bg-white text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                </motion.span>
+              </Link>
 
               {/* Mobile Menu Button */}
               <motion.button
