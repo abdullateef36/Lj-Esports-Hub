@@ -8,7 +8,7 @@ import { FaXTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch } from 'react-i
 export default function Footer() {
   const footerLinks = {
     Company: [
-      { name: 'About Us', href: '#about' },
+      { name: 'About Us', href: '/about' },
       { name: 'Our Talent', href: '#talent' },
       { name: 'Services', href: '/services' },
       { name: 'Careers', href: '#careers' },
