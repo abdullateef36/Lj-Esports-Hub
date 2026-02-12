@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { type, serviceName, applicant, applicationId } = body;
 
-    if (!type || !serviceName || !applicant || !applicationId) {
+    if (!type || !serviceName || !applicant) {
       return NextResponse.json(
         { error: "Missing required service application fields." },
         { status: 400 }
@@ -31,6 +31,12 @@ export async function POST(request: Request) {
     });
 
     if (type === "admin") {
+      if (!applicationId) {
+        return NextResponse.json(
+          { error: "Missing required application ID." },
+          { status: 400 }
+        );
+      }
       // Send notification to admin
       const logoUrl = "https://res.cloudinary.com/dogtpp7tp/image/upload/v1770731462/logo_one_x0e35n.jpg";
       
@@ -215,6 +221,11 @@ export async function POST(request: Request) {
         subject: `Application Confirmed: ${serviceName}`,
         html: userHtml,
       });
+    } else {
+      return NextResponse.json(
+        { error: "Invalid email type." },
+        { status: 400 }
+      );
     }
 
     return NextResponse.json(

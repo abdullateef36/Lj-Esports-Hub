@@ -79,7 +79,7 @@ export default function ServiceApplication({
       }
 
       // Send confirmation email to user
-      const userEmailResponse = await fetch("/api/send-service-email", {
+      const userEmailResponse = await fetch("/api/send-service", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,6 +90,7 @@ export default function ServiceApplication({
           applicant: {
             name: formData.fullName,
             email: formData.email,
+            phone: formData.phone,
           },
         }),
       });
