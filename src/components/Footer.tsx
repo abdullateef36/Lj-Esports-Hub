@@ -14,13 +14,13 @@ export default function Footer() {
       { name: 'Careers', href: '#careers' },
     ],
     Resources: [
-      { name: 'News', href: '#news' },
-      { name: 'Contact', href: '#contact' },
-      { name: 'FAQ', href: '#faq' },
+      { name: 'News', href: '/news' },
+      { name: 'Contact', href: '/contact' },
+      { name: 'FAQ', href: '/faq' },
     ],
     Legal: [
-      { name: 'Privacy Policy', href: '#privacy' },
-      { name: 'Terms & Conditions', href: '#terms' },
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Terms & Conditions', href: '/terms' },
     ],
   };
 
