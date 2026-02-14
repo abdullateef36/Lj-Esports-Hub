@@ -282,7 +282,7 @@ export default function FAQPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-heading text-6xl lg:text-8xl font-bold mb-6 leading-none uppercase"
+              className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-none uppercase"
             >
               Frequently<br />
               <span className="text-white/60">Asked Questions</span>
