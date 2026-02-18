@@ -31,6 +31,13 @@ export default function HomePage() {
     offset: ["start start", "end end"]
   });
 
+interface Client {
+  name: string;
+  logo: string;
+  accent: string;
+  bg: string;
+}
+
   const services = [
     {
       icon: Users,
@@ -108,11 +115,147 @@ export default function HomePage() {
     }
   ];
 
-  const clients = [
-    { name: 'Slack', logo: '/slack.jpg' },
-    { name: 'British', logo: '/british.jpg' },
-    { name: 'Bonton', logo: '/bonton.jpg' },
-  ];
+  const clients: Client[] = [
+  {
+    name: 'TÄG',
+    logo: '/tag.jpeg',
+    accent: '#D4AF37',
+    bg: '#0a3d2b',
+  },
+  {
+    name: 'NGC',
+    logo: '/nexal.jpeg',
+    accent: '#22c55e',
+    bg: '#111111',
+  },
+  {
+    name: 'Syndicate',
+    logo: '/syndicate.jpeg',
+    accent: '#7c3aed',
+    bg: '#111111',
+  },
+  {
+    name: 'Noobz',
+    logo: '/noobz.jpeg',
+    accent: '#38bdf8',
+    bg: '#0a1628',
+  },
+  {
+    name: 'Pixies',
+    logo: '/pixies.jpeg',
+    accent: '#ec4899',
+    bg: '#3d0a1e',
+  },
+];
+
+function Particle({ color }: { color: string }) {
+  return (
+    <motion.span
+      aria-hidden
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 90,
+        height: 90,
+        background: color,
+        filter: 'blur(45px)',
+        top: '50%',
+        left: '50%',
+        x: '-50%',
+        y: '-50%',
+      }}
+      variants={{
+        rest: { opacity: 0, scale: 0.6 },
+        hover: { opacity: 0.4, scale: 1.5 },
+      }}
+      transition={{ duration: 0.4 }}
+    />
+  );
+}
+
+function ClientCard({ client, index }: { client: Client; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      whileHover="hover"
+      animate="rest"
+      className="relative group cursor-pointer"
+    >
+      {/* Animated glow border */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        variants={{
+          rest: { boxShadow: '0 0 0 2px rgba(255,255,255,0.08)' },
+          hover: {
+            boxShadow: `0 0 0 2px ${client.accent}, 0 0 32px 4px ${client.accent}55`,
+          },
+        }}
+        transition={{ duration: 0.3 }}
+      />
+
+      {/* Card body */}
+      <motion.div
+        className="relative overflow-hidden flex flex-col items-center justify-center gap-4 p-6 sm:p-8"
+        style={{ background: client.bg, minHeight: 190 }}
+        variants={{
+          rest: { scale: 1 },
+          hover: { scale: 1.04 },
+        }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <Particle color={client.accent} />
+
+        {/* Logo */}
+        <motion.div
+          className="relative z-10 w-full flex items-center justify-center"
+          style={{ height: 96 }}
+          variants={{
+            rest: { filter: 'grayscale(1) brightness(0.65)', scale: 1 },
+            hover: { filter: 'grayscale(0) brightness(1)', scale: 1.12 },
+          }}
+          transition={{ duration: 0.4 }}
+        >
+          <Image
+            src={client.logo}
+            alt={client.name}
+            fill
+            className="object-contain"
+            sizes="(max-width: 640px) 140px, 180px"
+          />
+        </motion.div>
+
+        {/* Team name */}
+        <motion.span
+          className="relative z-10 text-xs font-black tracking-[0.22em] uppercase"
+          style={{ color: client.accent }}
+          variants={{
+            rest: { opacity: 0.45, y: 5 },
+            hover: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {client.name}
+        </motion.span>
+
+        {/* Corner diagonal accent */}
+        <motion.div
+          aria-hidden
+          className="absolute bottom-0 right-0 w-20 h-20 pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, transparent 50%, ${client.accent}22 50%)`,
+          }}
+          variants={{
+            rest: { opacity: 0 },
+            hover: { opacity: 1 },
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
 
   return (
     <div ref={containerRef} className="bg-white">
@@ -421,46 +564,80 @@ export default function HomePage() {
       </section>
 
       {/* Our Clients Section */}
-      <section className="py-24 pb-10 bg-white">
-        <div className="max-w-350 mx-auto px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-5xl lg:text-7xl font-bold text-black mb-6 uppercase">
-              Our Clients
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Trusted by leading brands and organizations in esports
-            </p>
-          </motion.div>
+<section className="py-24 pb-10 bg-white overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="text-center mb-16"
+    >
+      <h2 className="font-heading text-5xl lg:text-7xl font-bold text-black mb-6 uppercase">
+        Our Clients
+      </h2>
+      <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        Trusted by leading esports organisations across the globe
+      </p>
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="mx-auto mt-6 h-1 w-24 bg-black origin-left"
+      />
+    </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {clients.map((client, index) => (
-              <motion.div
-                key={client.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="border-2 border-black p-8 flex items-center justify-center bg-white hover:bg-black hover:border-white transition-all group"
-              >
+    {/* Desktop — 5-column grid */}
+    <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+      {clients.map((c, i) => (
+        <ClientCard key={c.name} client={c} index={i} />
+      ))}
+    </div>
+
+    {/* Mobile — auto-scrolling marquee */}
+    <div className="md:hidden relative overflow-hidden">
+      <motion.div
+        className="flex gap-4"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+      >
+        {[...clients, ...clients].map((c, i) => (
+          <motion.div
+            key={`${c.name}-${i}`}
+            whileHover="hover"
+            animate="rest"
+            className="shrink-0 w-36 relative"
+          >
+            <motion.div
+              className="relative overflow-hidden flex flex-col items-center justify-center gap-3 p-4"
+              style={{ background: c.bg, minHeight: 150, border: `1px solid ${c.accent}33` }}
+              variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }}
+              transition={{ duration: 0.3 }}
+            >
+              <Particle color={c.accent} />
+              <div className="relative w-full z-10" style={{ height: 70 }}>
                 <Image
-                  src={client.logo}
-                  alt={client.name}
-                  width={150}
-                  height={80}
-                  className="w-full h-auto object-contain grayscale group-hover:grayscale-0 transition-all"
+                  src={c.logo}
+                  alt={c.name}
+                  fill
+                  className="object-contain"
+                  sizes="120px"
                 />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
+              <span
+                className="relative z-10 text-xs font-black tracking-widest uppercase"
+                style={{ color: c.accent }}
+              >
+                {c.name}
+              </span>
+            </motion.div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="pt-24 pb-20 bg-white">
